@@ -11,11 +11,12 @@
 
           01 NUM1       PIC 9(4).
           01 NUM2       PIC 9(4).
-          01 RESULTADO  PIC 9(5).
+          01 RESULTADO  PIC 9(8).
           01 OPTYPE     PIC X(1).
 
           PROCEDURE DIVISION.
           MAIN-PROCEDURE.
+          CALL "SYSTEM" USING "cmd.exe /c cls".
           PERFORM RUTINAINICIO.
           STOP RUN.
 
@@ -90,3 +91,5 @@
                   DISPLAY "La opcion seleccionada no es valida."
                   PERFORM RUTINADATAINT
           END-EVALUATE.
+
+          END PROGRAM CALCULADORA-COBOL.
