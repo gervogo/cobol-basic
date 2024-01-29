@@ -18,10 +18,7 @@
 
           PROCEDURE DIVISION.
           MAIN-PROCEDURE.
-
-          PERFORM RUT-HEADER.
-
-          STOP-RUN.
+                PERFORM RUT-HEADER.
 
       *        CABECERA DEL PROGRAMA
           RUT-HEADER.
@@ -64,32 +61,22 @@
       *         INSERTAR WORK-H TRABAJADAS
           RUT-INS-WORK-H.
                 DISPLAY "Introduce horas trabajadas: "
-                ACCEPT WORK-H
+                ACCEPT WORK-H.
 
                 IF WORK-H NOT NUMERIC OR WORK-H = ZERO OR WORK-H > 40
                   DISPLAY "ERROR: El empleado " EMPLOYEE-NAME
                   " solo puede trabajar de 1 a 40 horas."
                   PERFORM RUT-INS-WORK-H
                 ELSE
-                  PERFORM DISP-WORK-DATA.
-
-
-      *         MOSTRAR CABECERA CON LOS DATOS RECOPILADOS
-          DISP-WORK-DATA.
-                DISPLAY "***************************"
-                DISPLAY "*    NAME    * ID * HORAS *"
-                DISPLAY "***************************"
-                DISPLAY "* "EMPLOYEE-NAME
-                " * "EMPLOYEE-ID
-                " *   "WORK-H
-                "  *"
-                DISPLAY "***************************"
-                PERFORM RUT-OPEN.
-
+                  PERFORM RUT-OPEN.
 
       *         LLAMAR A OTRO PROGRAMA PASANDO ID, NOMBRE Y WORK-H
           RUT-OPEN.
                 DISPLAY "ABRIENDO CALCULADORA DE SALARIO..."
-                CALL "CALCULADORA-SALARIO".
+                DISPLAY " "
+                CALL "CALCULADORA-SALARIO" USING
+                EMPLOYEE-ID EMPLOYEE-NAME WORK-H.
+
+          STOP RUN.
 
           END PROGRAM SISTEMA-GESTION-NOMINAS.
